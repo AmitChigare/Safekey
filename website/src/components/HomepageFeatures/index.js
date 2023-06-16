@@ -1,43 +1,46 @@
-import React from 'react';
-import clsx from 'clsx';
-import styles from './styles.module.css';
+import React from "react";
+import clsx from "clsx";
+import styles from "./styles.module.css";
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: "",
+    Svg: require("/static/img/img2E.svg").default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        No more jangling keychains or forgetting combinations, Just plug in your
+        USB for seamless access and sensations. From encrypted files to secret
+        realms, it's your gatekeeper.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: "",
+    Svg: require("/static/img/img3E.svg").default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        When your USB key vanishes, causing endless pressure, Fear not, for a
+        solution is here, quick and spry, you'll locate it in the blink of an
+        eye. Retrieve lost USB keys easily.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: "",
+    Svg: require("/static/img/img4E.svg").default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        In a world filled with digital footprints, a revolutionary solution
+        emerges. With a simple USB insertion, your sensitive files vanish from
+        prying eyes. No more worries about unauthorized access.
       </>
     ),
   },
 ];
 
-function Feature({Svg, title, description}) {
+function Feature({ Svg, title, description }) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx("col col--4")}>
       <div className="text--center">
         <Svg className={styles.featureSvg} role="img" />
       </div>

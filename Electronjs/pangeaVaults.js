@@ -111,17 +111,20 @@ async function DeletePendrive(USER_ID, UsbKey) {
 }
 
 //good
-async function UpdatePendriveLocations(USER_ID, key, value) {
+async function UpdatePendriveLocations(USER_ID, UsbKey, value) {
 
   let currentPendrives = await GetUserPendrives(USER_ID);
   let i = 0;
   let VAULT_ID = "";
-  for (i = 0; i < currentPendrives.items.length; i++) {
+  console.log(currentPendrives);
+  for (i = 0; i < currentPendrives.count; i++) {
     if(currentPendrives.items[i].name === UsbKey){
       VAULT_ID = currentPendrives.items[i].id;
       break;
     }
   }
+  console.log("VaultID :"+VAULT_ID.toString());
+  return ;
 
   try {
     const response = await vault.secretRotate(
@@ -133,18 +136,19 @@ async function UpdatePendriveLocations(USER_ID, key, value) {
     );
     return response.result;
   } catch (err) {
-    return "error";
+    throw err;
+    return err;
   }
 }
 
 //good
-async function UpdatePendriveKey(USER_ID, key) {
+async function UpdatePendriveKey(USER_ID, oldKey, newKey) {
 
   let currentPendrives = await GetUserPendrives(USER_ID);
   let i = 0;
   let VAULT_ID = "";
   for (i = 0; i < currentPendrives.items.length; i++) {
-    if(currentPendrives.items[i].name === UsbKey){
+    if(currentPendrives.items[i].name === oldKey){
       VAULT_ID = currentPendrives.items[i].id;
       break;
     }
@@ -154,7 +158,7 @@ async function UpdatePendriveKey(USER_ID, key) {
     const response = await vault.update(
       VAULT_ID,
       {
-        name: key,
+        name: newKey,
         //   folder: "/personal",
         //   metadata: {
         //     "created_by": "John Doe",

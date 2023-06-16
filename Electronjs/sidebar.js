@@ -86,6 +86,8 @@ function retrieveEntries(data) {
 async function OnClickDeleteUsb(){
     let dropDownForDelete = document.getElementById("DeletingUsbDropdown");
     let type=""
+    console.log(dropDownForDelete);
+    console.log(dropDownForDelete.value);
     if(dropDownForDelete.value==="None"){
         console.log("pendrive already empty");
         return ;
@@ -104,7 +106,7 @@ async function OnClickDeleteUsb(){
     // console.log("type : ",type)
     // let key = dropDownForDelete.value;
 
-    const pythonScriptPath = 'C:\\Users\\rushik\\Desktop\\gitClones\\Safekey\\scripts\\safekey.py';
+    const pythonScriptPath = PATH_TO_SAFEKEY;
     const scriptArgs = ['-d',type];
     console.log('python', [pythonScriptPath, ...scriptArgs]);
     const pythonProcess = spawn('python', [pythonScriptPath, ...scriptArgs]);
@@ -113,7 +115,7 @@ async function OnClickDeleteUsb(){
         output=data.toString()
         console.log(data.toString());
         setTimeout(() => {
-            window.location.href = 'animation.html';
+            // window.location.href = 'animation.html';
         }, 3); //
     });pythonProcess.on('error', (error) => {
         console.error('An error occurred while executing the Python script:', error);
@@ -136,7 +138,7 @@ async function OnClickDeleteUsb(){
 }
 
 function del_usb(type) {
-    const pythonScriptPath = 'C:\\Users\\rushik\\Desktop\\gitClones\\Safekey\\scripts\\safekey.py';
+    const pythonScriptPath = PATH_TO_SAFEKEY;
     const scriptArgs = ['-d',type];
     console.log('python', [pythonScriptPath, ...scriptArgs]);
     const pythonProcess = spawn('python', [pythonScriptPath, ...scriptArgs]);
@@ -162,7 +164,7 @@ function TransferDashOpenUsb(){
 }
 
 function get_usb_for_delete() {
-    const pythonScriptPath = 'C:\\Users\\rushik\\Desktop\\gitClones\\Safekey\\scripts\\safekey.py';
+    const pythonScriptPath = PATH_TO_SAFEKEY;
     const scriptArgs = ['-gu'];
     console.log('python', [pythonScriptPath, ...scriptArgs]);
     const pythonProcess = spawn('python', [pythonScriptPath, ...scriptArgs]);
@@ -199,6 +201,7 @@ function createDropdownDelete(entries) {
     dropdown.style.width = "434px";
     dropdown.style.backgroundColor = "#0D6EFD";
     dropdown.id = "DeletingUsbDropdown";
+    console.log("entrie :"+entries[0].toString());
     for (const entry of entries) {
         const option = document.createElement('option');
         option.value = entry.value;
@@ -261,7 +264,7 @@ function createDropdownRetrive(entries) {
 }
 
 function get_usb_for_retrieve() {
-    const pythonScriptPath = 'C:\\Users\\rushik\\Desktop\\gitClones\\Safekey\\scripts\\safekey.py';
+    const pythonScriptPath = PATH_TO_SAFEKEY;
     const scriptArgs = ['-gu'];
     console.log('python', [pythonScriptPath, ...scriptArgs]);
     const pythonProcess = spawn('python', [pythonScriptPath, ...scriptArgs]);
@@ -294,7 +297,16 @@ function get_usb_for_retrieve() {
 
 async function retriveUsb(){
     let usbDropdown = document.getElementById("RetrieveUsbDropdown");
-    let type = usbDropdown.text;
+    let type = "";
+    
+    let selectedOption = usbDropdown.options[usbDropdown.selectedIndex];
+    if (selectedOption.value !== "") {
+        type = selectedOption.text;
+        console.log("type: ", type);
+        let key = selectedOption.value;
+      } else {
+        console.log("No option selected");
+      }
     let key = usbDropdown.value;
     if(key !== 'None'){
         console.log("pendrive not None");
@@ -326,7 +338,7 @@ async function retriveUsb(){
     });
 
 
-    const pythonScriptPath = 'C:\\Users\\rushik\\Desktop\\gitClones\\Safekey\\scripts\\safekey.py';
+    const pythonScriptPath = PATH_TO_SAFEKEY;
     const scriptArgs = ['-lk',keyNeedToBeInserted , type, value];
     console.log('python', [pythonScriptPath, ...scriptArgs]);
     const pythonProcess = spawn('python', [pythonScriptPath, ...scriptArgs]);

@@ -7,7 +7,7 @@ const {
 
 const PANGEA = {
   PANGEA_DOMAIN: "aws.us.pangea.cloud",
-  VAULT_AUTH_TOKEN: "pts_t6i6nc6dnvcqswtanszugxzqteyiweju"
+  VAULT_AUTH_TOKEN: process.env.VAULT_AUTH_TOKEN
 }
 
 const token = PANGEA.VAULT_AUTH_TOKEN;

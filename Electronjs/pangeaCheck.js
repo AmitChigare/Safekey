@@ -4,27 +4,27 @@ const { GetUserPendrives, GetFileLocations, InsertNewPendrive, DeletePendrive, U
 
 // let user_id = localStorage.getItem("USER_ID");
 
-InsertNewPendrive("pui_3p7j5h2py7dolzwxp65yhsiihl34bzpw", "ukfkkjcckghtclxk", "intialFileLocations").then(result => {
+// InsertNewPendrive("pui_3p7j5h2py7dolzwxp65yhsiihl34bzpw", "kIkCAo09MgiY6kueL8k6ognJzv-raUKw0xCtzjeOv4=", "hi.txt").then(result => {
+//     console.log(result);
+// });
+
+GetUserPendrives("pui_3p7j5h2py7dolzwxp65yhsiihl34bzpw").then(result => {
     console.log(result);
 });
 
-// GetUserPendrives("pui_qfwvkt2foxyia4ofjlkw4o3ei5374qlo").then(result => {
+// GetFileLocations("pui_3p7j5h2py7dolzwxp65yhsiihl34bzpw", "initialKey").then(result => {
 //     console.log(result);
 // });
 
-// GetFileLocations("pui_qfwvkt2foxyia4ofjlkw4o3ei5374qlo", "initialKey").then(result => {
+// DeletePendrive("pui_3p7j5h2py7dolzwxp65yhsiihl34bzpw", "ABAoMfJy1PJ85KDtZZFfYvFVy7c-BfM_y-vznzNA8Gw=").then(result =>{
 //     console.log(result);
 // });
 
-// DeletePendrive("pui_qfwvkt2foxyia4ofjlkw4o3ei5374qlo", "initialKey").then(result =>{
+// UpdatePendriveLocations("pui_3p7j5h2py7dolzwxp65yhsiihl34bzpw", "Fb_IPeaGmY4tDqpkW-oEdzqt9pcbVb2MZ8BHCKJyTso=", "hi.txt").then(result =>{
 //     console.log(result);
 // });
 
-// UpdatePendriveLocations("pui_qfwvkt2foxyia4ofjlkw4o3ei5374qlo", "initialKey","newLocations").then(result =>{
-//     console.log(result);
-// });
-
-// UpdatePendriveKey("pui_qfwvkt2foxyia4ofjlkw4o3ei5374qlo", "newKey").then(result =>{
+// UpdatePendriveKey("pui_3p7j5h2py7dolzwxp65yhsiihl34bzpw", "axcvbnm", "ABAoMfJy1PJ85KDtZZFfYvFVy7c-BfM_y-vznzNA8Gw=").then(result =>{
 //     console.log(result);
 // });
 

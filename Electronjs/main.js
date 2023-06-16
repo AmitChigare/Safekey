@@ -113,12 +113,47 @@ function RunInsertNewPendrive() {
   const selectedFileDivs = selectedFilesDiv.getElementsByTagName("div");
   let value = "";
   for (const childElement of selectedFileDivs) {
-    value = value + SelectedFolderPath + childElement.textContent + ",";
+    value = value + SelectedFolderPath + childElement.textContent + " ";
   }
+  console.log("value:"+value.toString());
   let pendriveDropdown = document.getElementById("SelectedUsb");
+  
+  let type = pendriveDropdown.options[pendriveDropdown.selectedIndex];
+  let key ="";
+  if (type.value !== "") {
+      // type = type.text;
+      console.log("type: ", type);
+      key = type.value;
+    } else {
+      console.log("No option selected");
+    }
+  console.log("pendriveDropdown.value :"+pendriveDropdown.value.toString());
   if(pendriveDropdown.value === 'None'){
+    console.log("pendrive is empty, inserting key");
+
+    //getting newKey from scripts
+
+    const pythonScriptPath = PATH_TO_SAFEKEY;
+    const scriptArgs = ['-l', type.text, value];
+    console.log('python', [pythonScriptPath, ...scriptArgs]);
+    const pythonProcess = spawn('python', [pythonScriptPath, ...scriptArgs]);
+    let newKey = "";
+    pythonProcess.stdout.on('data', (data) => {
+        console.log(data.toString());
+        newKey = data.toString();
+    });
+
+    pythonProcess.stderr.on('data', (data) => {
+        const error = data.toString();
+        console.error('Python script error:', error);
+    });
+
+    pythonProcess.on('close', (code) => {
+        console.log('Python script exited with code:', code);
+    });
     try {
-      InsertNewPendrive(localStorage.getItem("USER_ID", newKey, value)).then(result => {
+      console.log()
+      InsertNewPendrive(localStorage.getItem("USER_ID"), newKey, value).then(result => {
           console.log(result);
       });
       //insertion complete
@@ -127,9 +162,13 @@ function RunInsertNewPendrive() {
     }
     return ;
   }
+  console.log("replacing pendrive key");
   try {
+    console.log(localStorage.getItem("USER_ID").toString()+
+    pendriveDropdown.value.toString()+
+    value.toString());
     UpdatePendriveLocations(
-      localStorage.getItem("email"),
+      localStorage.getItem("USER_ID"),
       pendriveDropdown.value,
       value
     ).then((result) => {
